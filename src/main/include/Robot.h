@@ -5,6 +5,8 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
+#include <rev/CANSparkMax.h>
+#include <frc/Joystick.h>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -22,4 +24,17 @@ class Robot : public frc::TimedRobot {
 
   void TestInit() override;
   void TestPeriodic() override;
+  
+  int rightMotorForward = 1;
+  int rightMotorBack = 2;
+  int leftMotorForward = 3;
+  int leftMotorBack = 4;
+  //Joysticks 
+  frc::Joystick * l_Joystick = new frc::Joystick(0);
+
+
+  rev::CANSparkMax *rightMotor = new rev::CANSparkMax(rightMotorForward, rev::CANSparkMax::CANSparkMaxLowLevel::MotorType::kBrushless);
+  rev::CANSparkMax *leftMotor = new rev::CANSparkMax(leftMotorForward, rev::CANSparkMax::CANSparkMaxLowLevel::MotorType::kBrushless);
+
+
 };

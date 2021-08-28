@@ -4,14 +4,26 @@
 
 #include "Robot.h"
 
-void Robot::RobotInit() {}
-void Robot::RobotPeriodic() {}
+
+void Robot::RobotInit() {
+
+
+}
+
+void Robot::RobotPeriodic() {
+
+}
 
 void Robot::AutonomousInit() {}
 void Robot::AutonomousPeriodic() {}
 
 void Robot::TeleopInit() {}
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+  rightMotor->Set(l_Joystick->GetRawAxis(1));
+  leftMotor->Set(l_Joystick->GetRawAxis(1));
+  
+  
+}
 
 void Robot::DisabledInit() {}
 void Robot::DisabledPeriodic() {}
@@ -24,3 +36,5 @@ int main() {
   return frc::StartRobot<Robot>();
 }
 #endif
+
+
