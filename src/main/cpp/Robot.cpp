@@ -6,8 +6,15 @@
 
 
 void Robot::RobotInit() {
+  rightLeadMotor->RestoreFactoryDefaults();
+  rightFollowMotor->RestoreFactoryDefaults();
+  leftLeadMotor->RestoreFactoryDefaults(); 
+  leftFollowMotor->RestoreFactoryDefaults();
 
-
+  rightLeadMotor->SetInverted(false);
+  rightFollowMotor->Follow(*rightLeadMotor, false);
+  leftLeadMotor->SetInverted(true);
+  leftFollowMotor->Follow(*leftLeadMotor, false);
 }
 
 void Robot::RobotPeriodic() {
@@ -19,10 +26,8 @@ void Robot::AutonomousPeriodic() {}
 
 void Robot::TeleopInit() {}
 void Robot::TeleopPeriodic() {
-  rightMotor->Set(l_Joystick->GetRawAxis(1));
-  leftMotor->Set(l_Joystick->GetRawAxis(1));
-  
-  
+  rightLeadMotor->Set(l_Joystick->GetRawAxis(1)); // left stick y-axis
+  leftLeadMotor->Set(l_Joystick->GetRawAxis(1));
 }
 
 void Robot::DisabledInit() {}
@@ -36,5 +41,6 @@ int main() {
   return frc::StartRobot<Robot>();
 }
 #endif
+
 
 

@@ -25,16 +25,18 @@ class Robot : public frc::TimedRobot {
   void TestInit() override;
   void TestPeriodic() override;
   
-  int rightMotorForward = 1;
-  int rightMotorBack = 2;
-  int leftMotorForward = 3;
-  int leftMotorBack = 4;
+  int rightLeadMotorID = 1;
+  int rightFollowMotorID = 2;
+  int leftLeadMotorID = 3;
+  int leftFollowMotorID = 4;
+  
   //Joysticks 
-  frc::Joystick * l_Joystick = new frc::Joystick(0);
+  frc::Joystick * l_Joystick = new frc::Joystick(0); // assign to port 0
 
 
-  rev::CANSparkMax *rightMotor = new rev::CANSparkMax(rightMotorForward, rev::CANSparkMax::CANSparkMaxLowLevel::MotorType::kBrushless);
-  rev::CANSparkMax *leftMotor = new rev::CANSparkMax(leftMotorForward, rev::CANSparkMax::CANSparkMaxLowLevel::MotorType::kBrushless);
-
+  rev::CANSparkMax *rightLeadMotor = new rev::CANSparkMax(rightLeadMotorID, rev::CANSparkMax::CANSparkMaxLowLevel::MotorType::kBrushless);
+  rev::CANSparkMax *rightFollowMotor = new rev::CANSparkMax(rightFollowMotorID, rev::CANSparkMax::CANSparkMaxLowLevel::MotorType::kBrushless);
+  rev::CANSparkMax *leftLeadMotor = new rev::CANSparkMax(leftLeadMotorID, rev::CANSparkMax::CANSparkMaxLowLevel::MotorType::kBrushless);
+  rev::CANSparkMax *leftFollowMotor = new rev::CANSparkMax(leftFollowMotorID, rev::CANSparkMax::CANSparkMaxLowLevel::MotorType::kBrushless);
 
 };
