@@ -7,14 +7,10 @@
 
 void Robot::RobotInit() {
   rightLeadMotor->RestoreFactoryDefaults();
-  rightFollowMotor->RestoreFactoryDefaults();
   leftLeadMotor->RestoreFactoryDefaults(); 
-  leftFollowMotor->RestoreFactoryDefaults();
 
   rightLeadMotor->SetInverted(false);
-  rightFollowMotor->Follow(*rightLeadMotor, false);
   leftLeadMotor->SetInverted(true);
-  leftFollowMotor->Follow(*leftLeadMotor, false);
 }
 
 void Robot::RobotPeriodic() {
@@ -26,8 +22,30 @@ void Robot::AutonomousPeriodic() {}
 
 void Robot::TeleopInit() {}
 void Robot::TeleopPeriodic() {
-  rightLeadMotor->Set(l_Joystick->GetRawAxis(1)); // left stick y-axis
-  leftLeadMotor->Set(l_Joystick->GetRawAxis(1));
+  float deadzone = 0.02;
+  double leftStick = l_Joystick->GetRawAxis(0);
+  double rightStick = r_Joystick->GetRawAxis(1);
+  double yMovement = leftStick - rightStick;
+  double xMovement = leftStick + rightStick;
+  int ySign = 1;
+  int xSign = 1;
+  double prcX, prcY;
+
+  prcY = fabs(leftStick);
+  prcX = fabs(rightStick);
+  double stickTrans(double input){
+    
+  }
+  if (prcY <= deadzone) {
+    
+    rightLeadMotor->Set(0);
+    leftLeadMotor->Set(0);
+  } else {
+
+    rightLeadMotor->Set(ySign * (1/(1 - deadzone) * (yMovement) - (deadzone/(1 - deadzone)))); // left stick y-axis
+    leftLeadMotor->Set(xSign * (1/(1 - deadzone) * (xMovement) - (deadzone/(1 - deadzone))));
+
+  }
 }
 
 void Robot::DisabledInit() {}
