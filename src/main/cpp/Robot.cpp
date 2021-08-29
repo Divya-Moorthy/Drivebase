@@ -22,30 +22,30 @@ void Robot::AutonomousPeriodic() {}
 
 void Robot::TeleopInit() {}
 void Robot::TeleopPeriodic() {
-  float deadzone = 0.02;
-  double leftStick = l_Joystick->GetRawAxis(0);
-  double rightStick = r_Joystick->GetRawAxis(1);
-  double yMovement = leftStick - rightStick;
-  double xMovement = leftStick + rightStick;
-  int ySign = 1;
-  int xSign = 1;
+  double leftStick = l_Joystick->GetRawAxis(1);
+  double rightStick = l_Joystick->GetRawAxis(4);
+  // double yMovement = leftStick - rightStick;
+  // double xMovement = leftStick + rightStick;
+
   double prcX, prcY;
 
-  prcY = fabs(leftStick);
-  prcX = fabs(rightStick);
-  double stickTrans(double input){
-    
-  }
-  if (prcY <= deadzone) {
-    
-    rightLeadMotor->Set(0);
-    leftLeadMotor->Set(0);
-  } else {
+  prcY = stickTrans(fabs(rightStick));
+  prcX = stickTrans(fabs(rightStick)); // og: rightStick
 
-    rightLeadMotor->Set(ySign * (1/(1 - deadzone) * (yMovement) - (deadzone/(1 - deadzone)))); // left stick y-axis
-    leftLeadMotor->Set(xSign * (1/(1 - deadzone) * (xMovement) - (deadzone/(1 - deadzone))));
-
+  copysignf(prcY, rightStick);
+  copysignf(prcX, leftStick);
+  if (fabs(rightStick) <= deadzone) {
+    prcY = 0;
   }
+  if (fabs(leftStick) <= deadzone) {
+    prcX = 0;
+  }
+    rightLeadMotor->Set(prcX - prcY);
+    leftLeadMotor->Set(prcX + prcY);
+  
+    
+// xSign * (1/(1 - deadzone) * (xMovement) - (deadzone/(1 - deadzone)))
+  
 }
 
 void Robot::DisabledInit() {}
