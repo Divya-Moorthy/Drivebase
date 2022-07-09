@@ -96,6 +96,7 @@ void Robot::TestPeriodic() {
 
 //This one is for current and speed
 
+/*
  for (double i=-1.0; i <= 1.0; i += 0.5){
     counter = 0;
     if (counter == 10){
@@ -112,6 +113,9 @@ void Robot::TestPeriodic() {
   }
 
 } //same 
+*/
+}
+
 
 #ifndef RUNNING_FRC_TESTS
 int main() {
