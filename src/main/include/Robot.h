@@ -9,6 +9,8 @@
 #include <rev/CANSparkMax.h>
 #include <frc/Joystick.h>
 #include <iostream>
+#include <cmath>
+#include <frc/smartdashboard/SmartDashboard.h>
 //#include <units.h>
 //#include <units/voltage.h>
 
@@ -47,12 +49,16 @@ class Robot : public frc::TimedRobot {
 //motor id's 
 //you can change them
 
+  double turnSensitivity;
+
   
   
   //Joysticks 
   frc::Joystick * l_Joystick = new frc::Joystick(0); // assign to port 0
   frc::Joystick * r_Joystick = new frc::Joystick(1); // assign to port 1
 //port is left or right joystick
+
+
 
 //library rev, init function/class CANSparkMax, rightLeadMotor is a variable storing the class CANSparkMax
 

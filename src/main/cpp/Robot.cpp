@@ -32,6 +32,9 @@ void Robot::TeleopInit() {
   
 } 
 
+
+
+
 //Taxing init sequence
 void Robot::TeleopPeriodic() { //periodic
   deadzone = 0.02;
@@ -40,6 +43,15 @@ void Robot::TeleopPeriodic() { //periodic
   leftStick = l_Joystick->GetRawAxis(0);
   rightStick = r_Joystick->GetRawAxis(1);
 //rawAxis is forward and backward
+
+turnSensitivity = 0.514919 * cos(3.25292 * rightStick) + 0.506336;
+
+//Change rightStick if it doesn't control turning
+
+frc::SmartDashboard::PutNumber("TurnSensitivity", turnSensitivity);
+
+
+
 // 0 on x, 1 on y 
 
   yMovement = leftStick - rightStick;
