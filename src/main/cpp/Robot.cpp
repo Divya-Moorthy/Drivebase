@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "Robot.h"
-
+  
 
 void Robot::RobotInit() {
   rightLeadMotor->RestoreFactoryDefaults();
@@ -12,7 +12,7 @@ void Robot::RobotInit() {
 // restore default values
 
   rightLeadMotor->SetInverted(false);
-  leftLeadMotor->SetInverted(true);
+  leftLeadMotor->SetInverted(false);
 
 //set motors for directions
 // Init starts immediatly, runs once
@@ -40,23 +40,29 @@ void Robot::TeleopPeriodic() { //periodic
   deadzone = 0.02;
 //deadzone is margin of error
 
-  leftStick = l_Joystick->GetRawAxis(0);
-  rightStick = r_Joystick->GetRawAxis(1);
+  leftStick = joystick->GetRawAxis(1);
+  rightStick = joystick->GetRawAxis(4);
 //rawAxis is forward and backward
-
+frc::SmartDashboard::PutNumber("rightStick", rightStick);
 turnSensitivity = 0.514919 * cos(3.25292 * rightStick) + 0.506336;
 
 //Change rightStick if it doesn't control turning
 
-frc::SmartDashboard::PutNumber("TurnSensitivity", turnSensitivity);
+
 
 
 
 // 0 on x, 1 on y 
 
-  yMovement = leftStick - rightStick;
-  xMovement = leftStick + rightStick;
+  yMovement = leftStick - turnSensitivity; //changed rightLeadMotor
+  xMovement = leftStick + turnSensitivity; //changed rightLeadMotor
 //pattern in table
+
+
+frc::SmartDashboard::PutNumber("TurnSensitivity", turnSensitivity);
+
+frc::SmartDashboard::PutNumber("TurnSensitivity", turnSensitivity);
+
 
   ySign = 1;
   xSign = 1;
@@ -80,6 +86,9 @@ frc::SmartDashboard::PutNumber("TurnSensitivity", turnSensitivity);
     //leftLeadMotor would take in x movement
   }
 }
+
+
+
 
 void Robot::DisabledInit() {} //closing sequence
 void Robot::DisabledPeriodic() {} // checking for closing command

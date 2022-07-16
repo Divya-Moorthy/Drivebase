@@ -34,8 +34,8 @@ class Robot : public frc::TimedRobot {
   void TestInit() override;
   void TestPeriodic() override;
   
-  int rightLeadMotorID = 12;
-  int leftLeadMotorID = 3;
+  int rightLeadMotorID = 9;
+  int leftLeadMotorID = 15;
 
   float deadzone;
   double leftStick;
@@ -54,8 +54,7 @@ class Robot : public frc::TimedRobot {
   
   
   //Joysticks 
-  frc::Joystick * l_Joystick = new frc::Joystick(0); // assign to port 0
-  frc::Joystick * r_Joystick = new frc::Joystick(1); // assign to port 1
+  frc::Joystick * joystick = new frc::Joystick(0); // assign to port 0
 //port is left or right joystick
 
 
